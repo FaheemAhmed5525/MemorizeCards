@@ -23,19 +23,62 @@ struct ContentView: View {
         .padding()
     }
     
-    var cards: some View {
-        HStack {
-            
+    var card: some View {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 90))]){
+            ForEach(0..<cardCount, id: \.self) { index in
+                CardView(content: symbols[index])
+            }
+            .aspectRatio(2/3, contentMode: .fit)
         }
     }
     
-    func cardCountAdjuster(by offset: Int, symbol: String)-> some View {
-        Button("-") {
-            
+    var cardCountAdjusters: some View {
+        HStack{
+            cardRemover
+            Spacer()
+            cardAdder
         }
-        Spacer()
-        return Button("+") {
+        .imageScale(.large)
+        .font(.largeTitle)
+    }
+    
+    func cardCountAdjuster(by offset: Int, symbol: String)-> some View {
+        Button(action: {
+            cardCount += offset
+        }, label: {
+            Image(systemName: symbol)
+        })
+        .disabled((cardCount + offset < 1 || cardCount + offset > symbols.count))
+    }
+    
+    var cardRemover: some View {
+        cardCountAdjuster(by: -1, symbol: "rectangle.stack.badge.minus.fill")
+    }
+    
+    var cardAdder: some View {
+        cardCountAdjuster(by: 1, symbol: "rectangle.stack.badge.plus.fill")
+    }
+}
+
+struct CardView: View {
+    let content: String
+    @State var isFaceUp = true
+    
+    var body: some View {
+        ZStack {
+            let base = RoundedRectangle(cornerRadius: 12)
+            Group {
+                base.fill(.blue)
+                base.strokeBorder(lineWidth: 2.0)
+                Text(content).font(.largeTitle)
+            }
+            .opacity(isFaceUp ? 1 : 0)
             
+            base.fill()
+                .opacity(isFaceUp ? 0 : 1)
+        }
+        .onTapGesture {
+            isFaceUp.toggle()
         }
     }
 }
