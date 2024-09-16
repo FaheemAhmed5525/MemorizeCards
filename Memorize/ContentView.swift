@@ -8,16 +8,39 @@
 import SwiftUI
 
 struct ContentView: View {
+    let symbols = ["🔺", "🔻", "🔸", "🔹", "🔶", "🔷", "🔴", "🟠", "🟡", "🟢", "🔵", "🟣", "⚫️", "⚪️", "🟤"]
+    @State var cardCount: Int = 4
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            ScrollView {
+                card
+            }
+            
+            Spacer()
+            cardCountAdjusters
         }
         .padding()
     }
+    
+    var cards: some View {
+        HStack {
+            
+        }
+    }
+    
+    func cardCountAdjuster(by offset: Int, symbol: String)-> some View {
+        Button("-") {
+            
+        }
+        Spacer()
+        return Button("+") {
+            
+        }
+    }
 }
+
+
 
 #Preview {
     ContentView()
