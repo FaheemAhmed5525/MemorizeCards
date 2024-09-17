@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0D9EDB972C99952300EF4182 /* MemorizeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9EDB962C99952300EF4182 /* MemorizeModel.swift */; };
+		0D9EDB992C99973A00EF4182 /* EmojiMemorize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9EDB982C99973A00EF4182 /* EmojiMemorize.swift */; };
 		0DC4D1DE2C983A9A001AEAF5 /* MemorizeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC4D1DD2C983A9A001AEAF5 /* MemorizeApp.swift */; };
 		0DC4D1E02C983A9A001AEAF5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC4D1DF2C983A9A001AEAF5 /* ContentView.swift */; };
 		0DC4D1E22C983A9D001AEAF5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DC4D1E12C983A9D001AEAF5 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		0D9EDB962C99952300EF4182 /* MemorizeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeModel.swift; sourceTree = "<group>"; };
+		0D9EDB982C99973A00EF4182 /* EmojiMemorize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemorize.swift; sourceTree = "<group>"; };
 		0DC4D1DA2C983A9A001AEAF5 /* Memorize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memorize.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DC4D1DD2C983A9A001AEAF5 /* MemorizeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeApp.swift; sourceTree = "<group>"; };
 		0DC4D1DF2C983A9A001AEAF5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				0DC4D1E12C983A9D001AEAF5 /* Assets.xcassets */,
 				0DC4D1E32C983A9D001AEAF5 /* Preview Content */,
 				0D9EDB962C99952300EF4182 /* MemorizeModel.swift */,
+				0D9EDB982C99973A00EF4182 /* EmojiMemorize.swift */,
 			);
 			path = Memorize;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 			files = (
 				0DC4D1E02C983A9A001AEAF5 /* ContentView.swift in Sources */,
 				0D9EDB972C99952300EF4182 /* MemorizeModel.swift in Sources */,
+				0D9EDB992C99973A00EF4182 /* EmojiMemorize.swift in Sources */,
 				0DC4D1DE2C983A9A001AEAF5 /* MemorizeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
