@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MemorizeModel<CardContent> {
+struct MemorizeModel<CardContent> where CardContent: Equatable {
     private(set) var cards: Array<Card>
     
     init(numOfPairsOfCards: Int, cardContentFactory: (Int) -> CardContent) {
@@ -15,8 +15,8 @@ struct MemorizeModel<CardContent> {
         // adding double of numOfPairsOfCards
         for pairIndex in 0..<max(2, numOfPairsOfCards) {
             let content = cardContentFactory(pairIndex)
-            cards.append(Card(content: content))
-            cards.append(Card(content: content))
+            cards.append(Card(content: content, id: "\(pairIndex + 1)a"))
+            cards.append(Card(content: content, id: "\(pairIndex + 1)b"))
         }
     }
     
@@ -25,13 +25,35 @@ struct MemorizeModel<CardContent> {
         print(cards)
     }
     
-    func chooseCard(_ card: Card) {
-        
+    mutating func chooseCard(_ card: Card) {
+        let chosenIndex = index(of: card)
+        cards[chosenIndex].isFaceUp.toggle()
     }
     
-    struct Card {
+    func index(of card: Card) -> Int{
+        for index in cards.indices {
+            if cards[index].id == card.id {
+                return index
+            }
+        }
+        return 0 //FIXME: bogus!
+    }
+    
+    struct Card: Equatable, Identifiable, CustomDebugStringConvertible {
+        var debugDescription: String {
+            return "\t\(id): \(content) \(isFaceUp ? "Open" : "Close")"
+        }
+        
+//        static func == (lhs: Card, rhs: Card) -> Bool {
+//            return lhs.isFaceUp == rhs.isFaceUp &&
+//            lhs.isMatched == rhs.isMatched
+//            lhs.content == rhs.content
+//        }
+        
         var isFaceUp: Bool = true
         var isMatched: Bool = false
         let content: CardContent
+        
+        var id: String
     }
 }
