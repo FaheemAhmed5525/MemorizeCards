@@ -8,21 +8,27 @@
 import SwiftUI
 
 struct EmojiMemorizeGameView: View {
-    var MemorizeViewModel: EmojiMemorize = EmojiMemorize()
+    @ObservedObject var MemorizeViewModel: EmojiMemorize
 
     
     var body: some View {
-        ScrollView {
-            Card
+        VStack {
+            ScrollView {
+                Card
+            }
+            Button("Shuffle") {
+                MemorizeViewModel.shuffle()
+            }
         }
         .padding()
     }
     
     var Card: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 90))]){
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 90), spacing: 0)], spacing: 0){
             ForEach(MemorizeViewModel.cards.indices, id: \.self) { index in
                 CardView(MemorizeViewModel.cards[index])
                     .aspectRatio(2/3, contentMode: .fit)
+                    .padding(4)
             }
         }
         .foregroundColor(.purple)
@@ -44,7 +50,10 @@ struct CardView: View {
             Group {
                 base.fill(.white)
                 base.strokeBorder(lineWidth: 2.0)
-                Text(card.content).font(.largeTitle)
+                Text(card.content)
+                    .font(.system(size: 120))
+                    .minimumScaleFactor(0.01)
+                    .aspectRatio(1, contentMode: .fit)
             }
                 .opacity(card.isFaceUp ? 1 : 0)
             
@@ -57,5 +66,5 @@ struct CardView: View {
 
 
 #Preview {
-    EmojiMemorizeGameView()
+    EmojiMemorizeGameView(MemorizeViewModel: EmojiMemorize())
 }

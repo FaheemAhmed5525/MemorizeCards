@@ -9,7 +9,7 @@ import SwiftUI
 
 
 
-class EmojiMemorize {
+class EmojiMemorize: ObservableObject {
     
     private static let emojis = ["🔺", "🔻", "🔸", "🔹", "🔶", "🔷", "🔴", "🟠", "🟡", "🟢", "🔵", "🟣", "⚫️", "⚪️", "🟤"]
     
@@ -24,10 +24,19 @@ class EmojiMemorize {
         }
     }
     
-    private var model = EmojiMemorize.createMemoryGame()
+    
+    
+    @Published private var model = EmojiMemorize.createMemoryGame()
     
     var cards: Array<MemorizeModel<String>.Card> {
         return model.cards
+    }
+    
+    //MARK: - Intents
+    
+    func shuffle() {
+        model.shuffle()
+        objectWillChange.send()
     }
     
     func chooseCard( _ card: MemorizeModel<String>.Card) {
