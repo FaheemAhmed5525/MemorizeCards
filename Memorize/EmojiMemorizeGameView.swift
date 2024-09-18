@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  EmojiMemorizeGameView.swift
 //  Memorize
 //
 //  Created by Faheeam Ahmed on 16/09/2024.
@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    let symbols = ["🔺", "🔻", "🔸", "🔹", "🔶", "🔷", "🔴", "🟠", "🟡", "🟢", "🔵", "🟣", "⚫️", "⚪️", "🟤"]
+struct EmojiMemorizeGameView: View {
+    var MemorizeViewModel: EmojiMemorize = EmojiMemorize()
+
     
     var body: some View {
         ScrollView {
@@ -19,8 +20,8 @@ struct ContentView: View {
     
     var Card: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 90))]){
-            ForEach(symbols.indices, id: \.self) { index in
-                CardView(content: symbols[index])
+            ForEach(MemorizeViewModel.cards.indices, id: \.self) { index in
+                CardView(MemorizeViewModel.cards[index])
                     .aspectRatio(2/3, contentMode: .fit)
             }
         }
@@ -31,24 +32,24 @@ struct ContentView: View {
 }
 
 struct CardView: View {
-    let content: String
-    @State var isFaceUp = true
+    let card: MemorizeModel<String>.Card
+    
+    init(_ card: MemorizeModel<String>.Card) {
+        self.card = card
+    }
     
     var body: some View {
         ZStack {
             let base = RoundedRectangle(cornerRadius: 12)
             Group {
-                base.fill(.blue)
+                base.fill(.white)
                 base.strokeBorder(lineWidth: 2.0)
-                Text(content).font(.largeTitle)
+                Text(card.content).font(.largeTitle)
             }
-            .opacity(isFaceUp ? 1 : 0)
+                .opacity(card.isFaceUp ? 1 : 0)
             
             base.fill()
-                .opacity(isFaceUp ? 0 : 1)
-        }
-        .onTapGesture {
-            isFaceUp.toggle()
+                .opacity(card.isFaceUp ? 0 : 1)
         }
     }
 }
@@ -56,5 +57,5 @@ struct CardView: View {
 
 
 #Preview {
-    ContentView()
+    EmojiMemorizeGameView()
 }
