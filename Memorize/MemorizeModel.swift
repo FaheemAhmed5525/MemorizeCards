@@ -20,23 +20,66 @@ struct MemorizeModel<CardContent> where CardContent: Equatable {
         }
     }
     
+    
+    var indexOfTheOneAndFaceUpCard: Int? {
+        get {
+            var faceUpCardIndices = [Int]()
+            for index in cards.indices {
+                if cards[index].isFaceUp {
+                    faceUpCardIndices.append(index)
+                }
+            }
+            if faceUpCardIndices.count == 1 {
+                return faceUpCardIndices.first
+            } else {
+                return nil
+            }
+            
+        }
+        set {
+            for index in cards.indices {
+                if index == newValue {
+                    cards[index].isFaceUp = true
+                } else {
+                    cards[index].isFaceUp = false
+                }
+            }
+        }
+    }
+    
     mutating func shuffle() {
         cards.shuffle()
         print(cards)
     }
     
     mutating func chooseCard(_ card: Card) {
-        let chosenIndex = index(of: card)
-        cards[chosenIndex].isFaceUp.toggle()
+        if let chosenIndex = cards.firstIndex(where: { $0.id == card.id }) {
+            if !cards[chosenIndex].isFaceUp && !cards[chosenIndex].isMatched {
+                if let potentialMatchedIndex = indexOfTheOneAndFaceUpCard {
+                    if cards[chosenIndex].content == cards[potentialMatchedIndex].content {
+                        cards[chosenIndex].isMatched = true
+                        cards[potentialMatchedIndex].isMatched = true
+                        print("Cards matched\(cards[potentialMatchedIndex].content)")
+                    }
+                    indexOfTheOneAndFaceUpCard = nil
+                } else {
+                    for index in cards.indices {
+                        cards[index].isFaceUp = false
+                    }
+                    indexOfTheOneAndFaceUpCard = chosenIndex
+                }
+                cards[chosenIndex].isFaceUp = true
+            }
+        }
     }
     
-    func index(of card: Card) -> Int{
+    private func index(of card: Card) -> Int! {
         for index in cards.indices {
             if cards[index].id == card.id {
                 return index
             }
         }
-        return 0 //FIXME: bogus!
+        return nil
     }
     
     struct Card: Equatable, Identifiable, CustomDebugStringConvertible {
@@ -50,7 +93,7 @@ struct MemorizeModel<CardContent> where CardContent: Equatable {
 //            lhs.content == rhs.content
 //        }
         
-        var isFaceUp: Bool = true
+        var isFaceUp: Bool = false
         var isMatched: Bool = false
         let content: CardContent
         

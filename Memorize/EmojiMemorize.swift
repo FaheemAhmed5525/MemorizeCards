@@ -35,8 +35,10 @@ class EmojiMemorize: ObservableObject {
     //MARK: - Intents
     
     func shuffle() {
+        
         model.shuffle()
         objectWillChange.send()
+        
     }
     
     func chooseCard( _ card: MemorizeModel<String>.Card) {
