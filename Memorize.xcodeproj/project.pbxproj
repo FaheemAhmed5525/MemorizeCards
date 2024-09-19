@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D7F63A42C9C0CE2006D7DA5 /* AspectVGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7F63A32C9C0CE2006D7DA5 /* AspectVGrid.swift */; };
 		0D9EDB972C99952300EF4182 /* MemorizeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9EDB962C99952300EF4182 /* MemorizeModel.swift */; };
 		0D9EDB992C99973A00EF4182 /* EmojiMemorize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9EDB982C99973A00EF4182 /* EmojiMemorize.swift */; };
 		0DC4D1DE2C983A9A001AEAF5 /* MemorizeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC4D1DD2C983A9A001AEAF5 /* MemorizeApp.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0D7F63A32C9C0CE2006D7DA5 /* AspectVGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectVGrid.swift; sourceTree = "<group>"; };
 		0D9EDB962C99952300EF4182 /* MemorizeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeModel.swift; sourceTree = "<group>"; };
 		0D9EDB982C99973A00EF4182 /* EmojiMemorize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemorize.swift; sourceTree = "<group>"; };
 		0DC4D1DA2C983A9A001AEAF5 /* Memorize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memorize.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				0DC4D1DD2C983A9A001AEAF5 /* MemorizeApp.swift */,
+				0D7F63A32C9C0CE2006D7DA5 /* AspectVGrid.swift */,
 				0D9EDB962C99952300EF4182 /* MemorizeModel.swift */,
 				0D9EDB982C99973A00EF4182 /* EmojiMemorize.swift */,
 				0DC4D1DF2C983A9A001AEAF5 /* EmojiMemorizeGameView.swift */,
@@ -266,6 +269,7 @@
 				0DC4D1E02C983A9A001AEAF5 /* EmojiMemorizeGameView.swift in Sources */,
 				0D9EDB972C99952300EF4182 /* MemorizeModel.swift in Sources */,
 				0D9EDB992C99973A00EF4182 /* EmojiMemorize.swift in Sources */,
+				0D7F63A42C9C0CE2006D7DA5 /* AspectVGrid.swift in Sources */,
 				0DC4D1DE2C983A9A001AEAF5 /* MemorizeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

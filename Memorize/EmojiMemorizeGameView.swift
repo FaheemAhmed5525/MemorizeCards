@@ -10,6 +10,7 @@ import SwiftUI
 struct EmojiMemorizeGameView: View {
     @ObservedObject var MemorizeViewModel: EmojiMemorize
 
+    private let aspectRatio: CGFloat = 2/3
     
     var body: some View {
         VStack {
@@ -24,49 +25,18 @@ struct EmojiMemorizeGameView: View {
         .padding()
     }
     
-    var Card: some View {
-        GeometryReader { geometry in
-            let gridItemSize = gridItemWidthThatFirts(
-                count: MemorizeViewModel.cards.count,
-                size: geometry.size, atAspectRadio: 2/3
-            )
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: gridItemSize), spacing: 0)], spacing: 0){
-                ForEach(MemorizeViewModel.cards) { card in
-                    CardView(card)
-                        .aspectRatio(2/3, contentMode: .fit)
-                        .padding(4)
-                        .onTapGesture {
-                            MemorizeViewModel.chooseCard(card)
-                        }
-                }
+    @ViewBuilder var Card: some View {
+        AspectVGrid(MemorizeViewModel.cards, aspectRatio: aspectRatio) { card in
+            CardView(card)
+                .padding(4)
+                .onTapGesture {
+                    MemorizeViewModel.chooseCard(card)
             }
         }
         .foregroundColor(.purple)
     }
-    
-    func gridItemWidthThatFirts (
-        count: Int,
-        size: CGSize,
-        atAspectRadio aspectRatio: CGFloat
-    ) -> CGFloat{
-        let count = CGFloat(count)
-        var columnCount = 1.0
-        repeat {
-            let width = size.width / columnCount
-            let height = width / aspectRatio
-            
-            let rowCount = (count / columnCount).rounded(.up)
-            if rowCount * height < size.height {
-                return (size.width / columnCount).rounded(.down)
-            }
-            columnCount += 1
-        } while columnCount < count
-        print("\(min(size.width / count, size.height * aspectRatio).rounded(.down))")
-        
-        
-        return 80
-    }
 }
+
 
 struct CardView: View {
     let card: MemorizeModel<String>.Card
