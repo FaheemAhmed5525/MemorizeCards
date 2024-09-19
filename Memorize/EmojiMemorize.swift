@@ -14,7 +14,7 @@ class EmojiMemorize: ObservableObject {
     private static let emojis = ["🔺", "🔻", "🔸", "🔹", "🔶", "🔷", "🔴", "🟠", "🟡", "🟢", "🔵", "🟣", "⚫️", "⚪️", "🟤"]
     
     private static func createMemoryGame() -> MemorizeModel<String> {
-        return MemorizeModel(numOfPairsOfCards: 16) { index in
+        return MemorizeModel(numOfPairsOfCards: 2) { index in
             if emojis.indices.contains(index) {
                 return emojis[index] //Same As EmojiMemorize.emojis[index] because global emojis is right there
             } else {
