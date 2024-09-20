@@ -32,28 +32,18 @@ struct CardView: View {
     }
     
     var body: some View {
-        ZStack {
-            let base = RoundedRectangle(cornerRadius: Constants.cornerRadius)
-            Group {
-                base.fill(.white)
-                base.strokeBorder(lineWidth: Constants.lineWidth)
-                Pie(startAngle: .degrees(225), endAngle: .degrees(315), clockwise: false)
-                    .opacity(Constants.Pie.opacity)
-                    .overlay(
-                        Text(card.content)
-                            .font(.system(size: Constants.FontSzie.largest))
-                            .minimumScaleFactor(Constants.FontSzie.scaleFactor)
-                            .aspectRatio(1, contentMode: .fit)
-                            .padding(Constants.Pie.insets)
-                    )
-                    .padding(Constants.insets)
-            }
-                .opacity(card.isFaceUp ? 1 : 0)
-            
-            base.fill()
-                .opacity(card.isFaceUp ? 0 : 1)
-        }
-        .opacity(card.isFaceUp || !card.isMatched ? 1 : 0)
+        Pie(startAngle: .degrees(225), endAngle: .degrees(315), clockwise: false)
+            .opacity(Constants.Pie.opacity)
+            .overlay(
+                Text(card.content)
+                    .font(.system(size: Constants.FontSzie.largest))
+                    .minimumScaleFactor(Constants.FontSzie.scaleFactor)
+                    .aspectRatio(1, contentMode: .fit)
+                    .padding(Constants.Pie.insets)
+            )
+            .padding(Constants.insets)
+            .cardify(isFaceUp: card.isFaceUp)
+            .opacity(card.isFaceUp ? 1 : 0)
     }
 }
 
@@ -71,4 +61,10 @@ struct CardView: View {
     }
         .padding()
         .foregroundColor(.green)
+}
+
+extension View {
+    func cardify(isFaceUp: Bool) -> some View {
+        modifier(Cardify(isFaceUp: isFaceUp))
+    }
 }
