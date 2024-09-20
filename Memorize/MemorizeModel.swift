@@ -76,7 +76,7 @@ struct MemorizeModel<CardContent> where CardContent: Equatable {
 //            lhs.content == rhs.content
 //        }
         
-        var isFaceUp: Bool = false
+        var isFaceUp: Bool = true
         var isMatched: Bool = false
         let content: CardContent
         
